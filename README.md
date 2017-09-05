@@ -1,11 +1,11 @@
 # NsiWindowsInstallerExamples
 
-In this repository you will find some cool and easy to understand NSI scripts with which you can install for example Windows Programs with an additional uninstaller, License that needs to be accepted, Multilanguage, different components and more - all without needing to program any of this, just using one simple NSI script file.
+In this repository you will find some cool and easy to understand NSI script templates with which you can install for example Windows Programs with an additional uninstaller, License that needs to be accepted, use Multilanguage, add a different components chooser and more - all without needing to program any of this, just using one simple NSI script file.
 
 ## How to create the `installer.exe`?
 
 1. First you need to download the newest version of the **N**ullsoft **S**criptable **I**nstall **S**ystem program/compiler
-   {0}. You find it here: [http://nsis.sourceforge.net/Download](http://nsis.sourceforge.net/Download)
+   * You find it here: [http://nsis.sourceforge.net/Download](http://nsis.sourceforge.net/Download)
 2. Start NSIS
 3. Click under the section **Compiler** the entry **Compile NSI scripts**
 4. On the new window click **File** in the menu bar and click **Load Script**
