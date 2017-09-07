@@ -22,9 +22,9 @@ The NSI script examples (`.nsi`) are personally tried scripts which you can chan
 
 I planned to include a:
 
-* quick and dirty normal UI example
-* quick and dirty Modern UI example
-* *professional* Modern UI example with Multilanguage
+* quick and dirty normal UI example (from the original documentation)
+* quick and dirty Modern UI example (from the original documentation)
+* [*professional* Modern UI example with Multilanguage](example_03_modern_ui_(recommended)/ExampleProgramModernUI.nsi) (made by me)
 
 *(nothing is final, I just aim at these for now)*
 
