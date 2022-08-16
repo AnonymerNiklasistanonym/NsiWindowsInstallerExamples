@@ -1,0 +1,1 @@
+Random file that should be unpacked during installation
