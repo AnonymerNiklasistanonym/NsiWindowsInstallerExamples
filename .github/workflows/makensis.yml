@@ -1,0 +1,78 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  # Run CI when a new version tag is created
+  create:
+    tags:
+      - v*
+  # Run CI when a new commit is pushed
+  push:
+    branches: [ main, dev ]
+  # Run CI when a new pull request is created
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+
+
+  # Check if the project can be built without errors
+  # Linting, tests and documentation generation is allowed to fail so that in
+  # case of an error in them the core build and scripts are still verified
+  build:
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        os: [ubuntu-latest,windows-latest]
+        include:
+          - os: ubuntu-latest
+            os-name: linux
+          - os: windows-latest
+            os-name: windows
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies (apt - Linux)
+      if: matrix.os == 'ubuntu-latest'
+      run: sudo apt install nsis
+    - name: Install dependencies (choco - Windows)
+      if: matrix.os == 'windows-latest'
+      run: choco install nsis
+    - name: Install dependencies (NSIS-plugins - Windows)
+      # TODO Find out how to install plugins on Linux
+      if: matrix.os == 'windows-latest'
+      run: |
+        $EnVarPluginArchive = Join-Path "example_04_modern_env_multilang_log_autouninstall" "EnVar.zip"
+        $NsisDir = Join-Path "${env:ProgramFiles(x86)}" "NSIS"
+        Expand-Archive $EnVarPluginArchive -DestinationPath $NsisDir -Force
+    - name: Run examples 01
+      run: |
+        makensis example1.nsi
+        makensis example2.nsi
+      working-directory: example_01_quick_and_dirty
+    - name: Run examples 02
+      run: makensis Basic.nsi
+      working-directory: example_02_quick_and_dirty_modern_ui
+    - name: Run examples 03
+      run: makensis ExampleProgramModernUI.nsi
+      working-directory: example_03_modern_ui_(recommended)
+    - name: Run examples 04
+      if: matrix.os == 'windows-latest'
+      run: makensis windows_installer.nsi
+      working-directory: example_04_modern_env_multilang_log_autouninstall
+    - name: Save binary artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: created_installers-${{ matrix.os-name }}
+        path: |
+          example_01_quick_and_dirty/*.exe
+          example_02_quick_and_dirty_modern_ui/*.exe
+          example_output/*.exe
+          example_04_modern_env_multilang_log_autouninstall/*.exe
+        retention-days: 14
+        if-no-files-found: error
