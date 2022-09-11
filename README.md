@@ -1,13 +1,33 @@
 # NsiWindowsInstallerExamples
 
-In this repository you will find some cool and easy to understand NSI script templates with which you can install for example Windows Programs with an additional uninstaller, License that needs to be accepted, use Multilanguage, add a different components chooser and more - all without needing to program any of this, just using one simple NSI script file.
+In this repository you will find some NSIS scripts with which you can create installers for Windows programs.
+
+There are multiple features of NSIS like:
+
+- adding a license
+- providing an uninstaller
+- supporting multiple languages
+- customizing the install directory
+- providing multiple components that can be enabled/disabled
+- setting environment variables
+
+## What is NSIS?
+
+> NSIS can create Windows installers that are capable of installing, uninstalling, setting system settings, extracting files, etc. Because NSIS is based on script files, you can create both simple and advanced installers.
+>
+> [https://nsis.sourceforge.io/Features](https://nsis.sourceforge.io/Features)
 
 ## How to create an `installer.exe`?
 
+### Setup NSIS
+
 First you need to download the newest version of the **N**ullsoft **S**criptable **I**nstall **S**ystem program/compiler:
 
-- You find it here: [http://nsis.sourceforge.net/Download](http://nsis.sourceforge.net/Download)
-- Or you can install it via winget: `winget install NSIS.NSIS`
+- You can find a binary release here: [http://nsis.sourceforge.net/Download](http://nsis.sourceforge.net/Download)
+- Or you can install it via `winget`: `winget install NSIS.NSIS`
+- Or if you are on Linux you can install it via a package manager:
+  - Ubuntu/`apt`: `apt install nsis`
+  - Arch/`yay`: `yay -S nsis`
 
 If you want to use it via a command line interface make sure that the binary directory has an entry in your environment variable PATH (the default should be `C:\Program Files (x86)\NSIS\Bin`) - make sure to restart your terminal after adding it so it will be recognized.
 
@@ -18,7 +38,7 @@ It depends on the Plugin but the only plugin that was used in this directory has
 
 ---
 
-All scripts were tested on Windows and Linux (via WSL) so they should work cross platform.
+All scripts were tested on Windows and Linux (via WSL) so they should work cross-platform.
 
 ### GUI
 
@@ -26,8 +46,8 @@ All scripts were tested on Windows and Linux (via WSL) so they should work cross
 2. Click under the section **Compiler** the entry **Compile NSI scripts**
 3. On the new window click **File** in the menu bar and click **Load Script**
 4. Select your written script and click **Open**
-5. The `installer.exe` (or however you named it) will instantly (after 2-15 seconds) be compiled and ready
-6. Over the button **Test Installer** you can even instantly test it
+5. The `installer.exe` (or however you named it) will be created
+6. Over the button **Test Installer** you can even test it without leaving the window
 
 ### CLI
 
@@ -35,11 +55,9 @@ All scripts were tested on Windows and Linux (via WSL) so they should work cross
 
 ## Further examples, Documentation?
 
-I am not the maker of this thing and just read some websites an *learned* it.
-
 The official documentation can be found here:
 
-* [NSIS Users Manual](http://nsis.sourceforge.net/Docs/)
-* [NSIS Modern User Interface Manual](http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html)
-* [Official NSI Modern UI Examples](http://nsis.sourceforge.net/Examples/Modern%20UI/)
-* [Official Even More NSI Examples](http://nsis.sourceforge.net/Examples/)
+- [NSIS Users Manual](http://nsis.sourceforge.net/Docs/)
+- [NSIS Modern User Interface Manual](http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html)
+- [Official NSI Modern UI Examples](http://nsis.sourceforge.net/Examples/Modern%20UI/)
+- [Official Even More NSI Examples](http://nsis.sourceforge.net/Examples/)
