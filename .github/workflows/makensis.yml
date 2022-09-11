@@ -46,36 +46,38 @@ jobs:
     - name: Install dependencies (NSIS-plugins - Windows)
       if: matrix.os == 'windows-latest'
       run: |
-        $EnVarPluginArchive = Join-Path "example_04_modern_env_multilang_log_autouninstall" "EnVar.zip"
+        $EnVarPluginArchive = Join-Path "example_04_modern_ui_plus_env_variables_logs_autouninstall" "EnVar.zip"
         $NsisDir = Join-Path "${env:ProgramFiles(x86)}" "NSIS"
         Expand-Archive $EnVarPluginArchive -DestinationPath $NsisDir -Force
     - name: Install dependencies (NSIS-plugins - Linux)
       if: matrix.os == 'ubuntu-latest'
-      run: sudo unzip -f "example_04_modern_env_multilang_log_autouninstall/EnVar.zip" -d "/usr/share/nsis"
-    - name: Run examples 01
-      run: |
-        makensis example1.nsi
-        makensis example2.nsi
-      working-directory: example_01_quick_and_dirty
-    - name: Run examples 02
-      run: makensis Basic.nsi
-      working-directory: example_02_quick_and_dirty_modern_ui
-    - name: Run examples 03
-      run: makensis ExampleProgramModernUI.nsi
-      working-directory: example_03_modern_ui_(recommended)
-    - name: Run examples 04
+      run: sudo unzip -f "example_04_modern_ui_plus_env_variables_logs_autouninstall/EnVar.zip" -d "/usr/share/nsis"
+    - name: Run example 01
+      run: makensis windows_installer.nsi
+      working-directory: example_01_basics
+    - name: Run example 02
+      run: makensis windows_installer.nsi
+      working-directory: example_02_license_uninstaller_components
+    - name: Run example 03
+      run: makensis windows_installer.nsi
+      working-directory: example_03_modern_ui_and_multi_language
+    - name: Run example 04
       # TODO Investigate why this fails on GitHub Actions but not on local WSL
       if: matrix.os == 'windows-latest'
       run: makensis windows_installer.nsi
-      working-directory: example_04_modern_env_multilang_log_autouninstall
+      working-directory: example_04_modern_ui_plus_env_variables_logs_autouninstall
+    - name: Run example 05
+      run: makensis windows_installer.nsi
+      working-directory: example_05_modern_ui_with_custom_pages
     - name: Save binary artifacts
       uses: actions/upload-artifact@v3
       with:
         name: created_installers-${{ matrix.os-name }}
         path: |
-          example_01_quick_and_dirty/*.exe
-          example_02_quick_and_dirty_modern_ui/*.exe
-          example_output/*.exe
-          example_04_modern_env_multilang_log_autouninstall/*.exe
+          example_01_basics/*.exe
+          example_02_license_uninstaller_components/*.exe
+          example_03_modern_ui_and_multi_language/*.exe
+          example_04_modern_ui_plus_env_variables_logs_autouninstall/*.exe
+          example_05_modern_ui_with_custom_pages/*.exe
         retention-days: 14
         if-no-files-found: error
